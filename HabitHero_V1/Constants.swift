@@ -7,6 +7,10 @@
 
 struct K {
     
+    // Side Menu
+    static let sideMenuCellIdentifier = "ReusableSideMenuCell"
+    static let sideMenuNibName = "SideMenuItem"
+    
     // Habit Items
     static let cellIdentifier = "ReusableCell"
     static let cellNibName = "HabitCell"
@@ -15,10 +19,14 @@ struct K {
     static let HabitsOverviewViewControllerID = "HabitsOverviewViewController"
     static let LoginViewControllerID = "LoginViewController"
     static let SignUpViewControllerID = "SignUpViewController"
+    static let NavigationViewController = "NavigationViewController"
     
     // Colors used in the app
     struct AppColors {
         static let cyan = "AppColorCyan"
+        static let grey = "AppColorGrey"
+        static let black = "AppColorBlack"
+        static let white = "AppColorWhite"
     }
 
 }

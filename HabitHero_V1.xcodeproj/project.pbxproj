@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300C575029B885A100CA7B16 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C574E29B885A100CA7B16 /* SideMenuItem.swift */; };
+		300C575129B885A100CA7B16 /* SideMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300C574F29B885A100CA7B16 /* SideMenuItem.xib */; };
+		300C575329B88AAE00CA7B16 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575229B88AAE00CA7B16 /* SideMenuController.swift */; };
 		3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765229B1FEE400F366A1 /* AppDelegate.swift */; };
 		3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765429B1FEE400F366A1 /* SceneDelegate.swift */; };
 		3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765629B1FEE400F366A1 /* LoginViewController.swift */; };
@@ -29,12 +32,17 @@
 		3041768429B5C59E00F366A1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041768329B5C59E00F366A1 /* Constants.swift */; };
 		3041768629B5D12E00F366A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3041768529B5D12E00F366A1 /* GoogleService-Info.plist */; };
 		3041768B29B5DCD400F366A1 /* HabitsOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041768A29B5DCD400F366A1 /* HabitsOverviewViewController.swift */; };
-		3041768D29B5F67900F366A1 /* habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041768C29B5F67900F366A1 /* habit.swift */; };
+		3041768D29B5F67900F366A1 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041768C29B5F67900F366A1 /* Habit.swift */; };
+		3041769429B740E900F366A1 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041769229B740E900F366A1 /* HabitCell.swift */; };
+		3041769529B740E900F366A1 /* HabitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3041769329B740E900F366A1 /* HabitCell.xib */; };
 		EFB61D11A71A1376EF0A0D99 /* Pods_HabitHero_V1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09AB3BA54BEEF788218CFC01 /* Pods_HabitHero_V1.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		09AB3BA54BEEF788218CFC01 /* Pods_HabitHero_V1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HabitHero_V1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		300C574E29B885A100CA7B16 /* SideMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
+		300C574F29B885A100CA7B16 /* SideMenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuItem.xib; sourceTree = "<group>"; };
+		300C575229B88AAE00CA7B16 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		3041764F29B1FEE400F366A1 /* HabitHero_V1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHero_V1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3041765229B1FEE400F366A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3041765429B1FEE400F366A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +67,9 @@
 		3041768329B5C59E00F366A1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3041768529B5D12E00F366A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3041768A29B5DCD400F366A1 /* HabitsOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsOverviewViewController.swift; sourceTree = "<group>"; };
-		3041768C29B5F67900F366A1 /* habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = habit.swift; sourceTree = "<group>"; };
+		3041768C29B5F67900F366A1 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		3041769229B740E900F366A1 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
+		3041769329B740E900F366A1 /* HabitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HabitCell.xib; sourceTree = "<group>"; };
 		45BE801BADE8EB5107B06AB1 /* Pods-HabitHero_V1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHero_V1.debug.xcconfig"; path = "Target Support Files/Pods-HabitHero_V1/Pods-HabitHero_V1.debug.xcconfig"; sourceTree = "<group>"; };
 		84202E30D2FC563E795B926A /* Pods-HabitHero_V1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHero_V1.release.xcconfig"; path = "Target Support Files/Pods-HabitHero_V1/Pods-HabitHero_V1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				3041765829B1FEE400F366A1 /* Main.storyboard */,
+				3041769229B740E900F366A1 /* HabitCell.swift */,
+				3041769329B740E900F366A1 /* HabitCell.xib */,
+				300C574E29B885A100CA7B16 /* SideMenuItem.swift */,
+				300C574F29B885A100CA7B16 /* SideMenuItem.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,6 +168,7 @@
 				3041765629B1FEE400F366A1 /* LoginViewController.swift */,
 				3041768129B2195400F366A1 /* SignUpViewController.swift */,
 				3041768A29B5DCD400F366A1 /* HabitsOverviewViewController.swift */,
+				300C575229B88AAE00CA7B16 /* SideMenuController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -161,7 +176,7 @@
 		3041768929B5D2CD00F366A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3041768C29B5F67900F366A1 /* habit.swift */,
+				3041768C29B5F67900F366A1 /* Habit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -234,6 +249,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				300C575129B885A100CA7B16 /* SideMenuItem.xib in Resources */,
+				3041769529B740E900F366A1 /* HabitCell.xib in Resources */,
 				3041767529B2019600F366A1 /* Roboto-Thin.ttf in Resources */,
 				3041767A29B2019600F366A1 /* Roboto-Italic.ttf in Resources */,
 				3041767D29B2019600F366A1 /* Roboto-LightItalic.ttf in Resources */,
@@ -304,11 +321,14 @@
 			files = (
 				3041768B29B5DCD400F366A1 /* HabitsOverviewViewController.swift in Sources */,
 				3041768429B5C59E00F366A1 /* Constants.swift in Sources */,
+				3041769429B740E900F366A1 /* HabitCell.swift in Sources */,
 				3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */,
 				3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */,
+				300C575329B88AAE00CA7B16 /* SideMenuController.swift in Sources */,
 				3041768229B2195400F366A1 /* SignUpViewController.swift in Sources */,
 				3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */,
-				3041768D29B5F67900F366A1 /* habit.swift in Sources */,
+				3041768D29B5F67900F366A1 /* Habit.swift in Sources */,
+				300C575029B885A100CA7B16 /* SideMenuItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@ import FirebaseCore
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -20,6 +21,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        
+        // Button Setup
+        
+        loginButton.layer.cornerRadius = 5
+        loginButton.layer.masksToBounds = true
         
         // Modifying the text entry fields
         
@@ -48,9 +54,19 @@ class LoginViewController: UIViewController {
                 if let e = error {
                     print(e) //present pop up!
                 } else {
-                    let habitsOverviewController = self?.storyboard!.instantiateViewController(withIdentifier: K.HabitsOverviewViewControllerID) as! HabitsOverviewViewController
+                    print("User successfully logged in")
                     
+                    let navigationViewController = self?.storyboard!.instantiateViewController(withIdentifier: K.NavigationViewController) as! UINavigationController
+                    
+                    
+                    self?.present(navigationViewController, animated: true, completion: nil)
+                    
+                    /*
+                    // can be used if no navigation controller is used
+                    let habitsOverviewController = self?.storyboard!.instantiateViewController(withIdentifier: K.HabitsOverviewViewControllerID) as! HabitsOverviewViewController
+                     
                     self?.present(habitsOverviewController, animated: true, completion: nil)
+                    */
                 }
                 
             }

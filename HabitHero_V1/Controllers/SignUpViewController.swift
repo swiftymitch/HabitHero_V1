@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var signUpButton: UIButton!
+    
     @IBOutlet private weak var firstNameTextField: UITextField!
     @IBOutlet private weak var lastNameTextField: UITextField!
     @IBOutlet private weak var emailTextField: UITextField!
@@ -24,7 +26,12 @@ class SignUpViewController: UIViewController {
         
         self.isModalInPresentation = true
         
+        // Button Setup
         
+        signUpButton.layer.cornerRadius = 5
+        signUpButton.layer.masksToBounds = true
+        
+        // Dataentry Fields Setup
         firstNameTextField.backgroundColor = UIColor.white.withAlphaComponent(0.2)
         
         firstNameTextField.attributedPlaceholder = NSAttributedString(
