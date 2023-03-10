@@ -10,6 +10,9 @@
 		300C575029B885A100CA7B16 /* SideMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C574E29B885A100CA7B16 /* SideMenuItem.swift */; };
 		300C575129B885A100CA7B16 /* SideMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 300C574F29B885A100CA7B16 /* SideMenuItem.xib */; };
 		300C575329B88AAE00CA7B16 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575229B88AAE00CA7B16 /* SideMenuController.swift */; };
+		300C575529BB21F200CA7B16 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575429BB21F200CA7B16 /* ProfileViewController.swift */; };
+		300C575729BB224F00CA7B16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575629BB224F00CA7B16 /* SettingsViewController.swift */; };
+		300C575929BB228400CA7B16 /* OverallAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */; };
 		3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765229B1FEE400F366A1 /* AppDelegate.swift */; };
 		3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765429B1FEE400F366A1 /* SceneDelegate.swift */; };
 		3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765629B1FEE400F366A1 /* LoginViewController.swift */; };
@@ -43,6 +46,9 @@
 		300C574E29B885A100CA7B16 /* SideMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuItem.swift; sourceTree = "<group>"; };
 		300C574F29B885A100CA7B16 /* SideMenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuItem.xib; sourceTree = "<group>"; };
 		300C575229B88AAE00CA7B16 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		300C575429BB21F200CA7B16 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		300C575629BB224F00CA7B16 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAnalyticsViewController.swift; sourceTree = "<group>"; };
 		3041764F29B1FEE400F366A1 /* HabitHero_V1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHero_V1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3041765229B1FEE400F366A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3041765429B1FEE400F366A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +175,9 @@
 				3041768129B2195400F366A1 /* SignUpViewController.swift */,
 				3041768A29B5DCD400F366A1 /* HabitsOverviewViewController.swift */,
 				300C575229B88AAE00CA7B16 /* SideMenuController.swift */,
+				300C575429BB21F200CA7B16 /* ProfileViewController.swift */,
+				300C575629BB224F00CA7B16 /* SettingsViewController.swift */,
+				300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -321,14 +330,17 @@
 			files = (
 				3041768B29B5DCD400F366A1 /* HabitsOverviewViewController.swift in Sources */,
 				3041768429B5C59E00F366A1 /* Constants.swift in Sources */,
+				300C575929BB228400CA7B16 /* OverallAnalyticsViewController.swift in Sources */,
 				3041769429B740E900F366A1 /* HabitCell.swift in Sources */,
 				3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */,
 				3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */,
 				300C575329B88AAE00CA7B16 /* SideMenuController.swift in Sources */,
+				300C575529BB21F200CA7B16 /* ProfileViewController.swift in Sources */,
 				3041768229B2195400F366A1 /* SignUpViewController.swift in Sources */,
 				3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */,
 				3041768D29B5F67900F366A1 /* Habit.swift in Sources */,
 				300C575029B885A100CA7B16 /* SideMenuItem.swift in Sources */,
+				300C575729BB224F00CA7B16 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

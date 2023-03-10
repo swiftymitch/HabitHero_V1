@@ -10,12 +10,15 @@ import FirebaseCore
 import FirebaseAuth
 import SideMenu
 
-class HabitsOverviewViewController: UIViewController {
+class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     
     @IBOutlet private weak var tableView: UITableView!
     
+    private let settingsVC = SettingsViewController()
+    private let profileVC = ProfileViewController()
+    private let overallAnalyticsVC = OverallAnalyticsViewController()
     
-    var menu: SideMenuNavigationController?
+    private var menu: SideMenuNavigationController?
     
     var habits: [Habit] = [
         Habit(name: "Workout", description: "Get Stronger"),
@@ -34,28 +37,19 @@ class HabitsOverviewViewController: UIViewController {
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
         // Configuration of sidemenu
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
+        let menuItems = MenuListController(with: SideMenuItems.allCases)
+        menuItems.delegate = self
+        
+        menu = SideMenuNavigationController(rootViewController: menuItems)
         menu?.leftSide = true
         menu?.setNavigationBarHidden(true, animated: false)
         
         SideMenuManager.default.leftMenuNavigationController = menu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
-        
+        addChildControllers()
        
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         do {
@@ -73,45 +67,82 @@ class HabitsOverviewViewController: UIViewController {
         
     }
     
+    private func addChildControllers() {
+        addChild(settingsVC)
+        addChild(profileVC)
+        addChild(overallAnalyticsVC)
+        
+        view.addSubview(settingsVC.view)
+        view.addSubview(profileVC.view)
+        view.addSubview(overallAnalyticsVC.view)
+        
+        settingsVC.view.frame = view.bounds
+        profileVC.view.frame = view.bounds
+        overallAnalyticsVC.view.frame = view.bounds
+        
+        settingsVC.didMove(toParent: self)
+        profileVC.didMove(toParent: self)
+        overallAnalyticsVC.didMove(toParent: self)
+        
+        settingsVC.view.isHidden = true
+        profileVC.view.isHidden = true
+        overallAnalyticsVC.view.isHidden = true
+    }
     
     @IBAction func sideBarButtonPressed(_ sender: UIBarButtonItem) {
         
         present(menu!, animated: true, completion: nil)
     }
     
+    func didSelectMenuItem(named: SideMenuItems) {
+        menu?.dismiss(animated: true, completion: nil)
+        
+        title = named.rawValue
+        
+        switch named {
+        
+        case .home:
+            settingsVC.view.isHidden = true
+            profileVC.view.isHidden = true
+            overallAnalyticsVC.view.isHidden = true
+            print("Home Menuitem was choosen")
+            
+        case .analytics:
+            settingsVC.view.isHidden = true
+            profileVC.view.isHidden = true
+            overallAnalyticsVC.view.isHidden = false
+            print("Analytics Menuitem was choosen")
+            
+        case .profile:
+            settingsVC.view.isHidden = true
+            overallAnalyticsVC.view.isHidden = true
+            profileVC.view.isHidden = false
+            print("Profile Menuitem was choosen")
+            
+        case.settings:
+            profileVC.view.isHidden = true
+            overallAnalyticsVC.view.isHidden = true
+            settingsVC.view.isHidden = false
+            print("Settings Menuitem was choosen")
+        case .logout:
+            do {
+                try Auth.auth().signOut()
+                
+                print("User logged out")
+                
+                let loginController = self.storyboard!.instantiateViewController(withIdentifier: K.LoginViewControllerID) as! LoginViewController
+                
+                self.present(loginController, animated: true, completion: nil)
+                
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
+        }
+    }
+    
 }
 
-// Sidemenu
-class MenuListController: UITableViewController {
-    
-    
-    var items = ["First", "Second", "Third"]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.backgroundColor = UIColor(named: K.AppColors.cyan)
-        tableView.register(UINib(nibName: K.sideMenuNibName, bundle: nil), forCellReuseIdentifier: K.sideMenuCellIdentifier)
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let menucell = tableView.dequeueReusableCell(withIdentifier: K.sideMenuCellIdentifier, for: indexPath)
-        menucell.textLabel?.text = items[indexPath.row]
-        menucell.textLabel?.textColor = UIColor(named: K.AppColors.white)
-        menucell.textLabel?.backgroundColor = UIColor(named: K.AppColors.cyan)
-        return menucell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        // do something
-    }
-}
+//MARK:  - Tableview Datasource
 
 extension HabitsOverviewViewController: UITableViewDataSource {
     
@@ -128,9 +159,9 @@ extension HabitsOverviewViewController: UITableViewDataSource {
         //cell.habitDescriptionTextField.text = habits[indexPath.row].description
         return cell
     }
-    
-    
 }
+
+//MARK:  - Tableview Delegate
 
 extension HabitsOverviewViewController: UITableViewDelegate {
     
@@ -138,3 +169,6 @@ extension HabitsOverviewViewController: UITableViewDelegate {
         print("go to details page of habit")
     }
 }
+
+
+
