@@ -19,7 +19,8 @@ struct K {
     static let HabitsOverviewViewControllerID = "HabitsOverviewViewController"
     static let LoginViewControllerID = "LoginViewController"
     static let SignUpViewControllerID = "SignUpViewController"
-    static let NavigationViewController = "NavigationViewController"
+    static let NavigationViewControllerID = "NavigationViewController"
+    static let HabitDetailsViewControllerID = "HabitDetailsViewController"
     
     // Colors used in the app
     struct AppColors {

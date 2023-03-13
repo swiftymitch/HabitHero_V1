@@ -13,6 +13,7 @@
 		300C575529BB21F200CA7B16 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575429BB21F200CA7B16 /* ProfileViewController.swift */; };
 		300C575729BB224F00CA7B16 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575629BB224F00CA7B16 /* SettingsViewController.swift */; };
 		300C575929BB228400CA7B16 /* OverallAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */; };
+		300CCC8529BF24FD007B633A /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300CCC8429BF24FD007B633A /* HabitDetailsViewController.swift */; };
 		3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765229B1FEE400F366A1 /* AppDelegate.swift */; };
 		3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765429B1FEE400F366A1 /* SceneDelegate.swift */; };
 		3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041765629B1FEE400F366A1 /* LoginViewController.swift */; };
@@ -49,6 +50,7 @@
 		300C575429BB21F200CA7B16 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		300C575629BB224F00CA7B16 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallAnalyticsViewController.swift; sourceTree = "<group>"; };
+		300CCC8429BF24FD007B633A /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		3041764F29B1FEE400F366A1 /* HabitHero_V1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitHero_V1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3041765229B1FEE400F366A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3041765429B1FEE400F366A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				300C575429BB21F200CA7B16 /* ProfileViewController.swift */,
 				300C575629BB224F00CA7B16 /* SettingsViewController.swift */,
 				300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */,
+				300CCC8429BF24FD007B633A /* HabitDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				300C575529BB21F200CA7B16 /* ProfileViewController.swift in Sources */,
 				3041768229B2195400F366A1 /* SignUpViewController.swift in Sources */,
 				3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */,
+				300CCC8529BF24FD007B633A /* HabitDetailsViewController.swift in Sources */,
 				3041768D29B5F67900F366A1 /* Habit.swift in Sources */,
 				300C575029B885A100CA7B16 /* SideMenuItem.swift in Sources */,
 				300C575729BB224F00CA7B16 /* SettingsViewController.swift in Sources */,

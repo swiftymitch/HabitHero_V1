@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
                 } else {
                     print("User successfully logged in")
                     
-                    let navigationViewController = self?.storyboard!.instantiateViewController(withIdentifier: K.NavigationViewController) as! UINavigationController
+                    let navigationViewController = self?.storyboard!.instantiateViewController(withIdentifier: K.NavigationViewControllerID) as! UINavigationController
                     
                     
                     self?.present(navigationViewController, animated: true, completion: nil)

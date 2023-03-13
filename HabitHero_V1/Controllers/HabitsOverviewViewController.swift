@@ -51,6 +51,7 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
        
     }
     
+    /*
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         do {
             try Auth.auth().signOut()
@@ -66,6 +67,7 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         }
         
     }
+    */
     
     private func addChildControllers() {
         addChild(settingsVC)
@@ -166,7 +168,9 @@ extension HabitsOverviewViewController: UITableViewDataSource {
 extension HabitsOverviewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("go to details page of habit")
+        if let HabitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
+            self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
+        }
     }
 }
 
