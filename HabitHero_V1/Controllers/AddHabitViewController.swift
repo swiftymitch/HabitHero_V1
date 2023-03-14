@@ -1,23 +1,23 @@
 //
-//  HabitDetailsViewController.swift
+//  AddHabitViewController.swift
 //  HabitHero_V1
 //
-//  Created by Michael Gruber on 13.03.23.
+//  Created by Michael Gruber on 14.03.23.
 //
 
 import UIKit
 
-class HabitDetailsViewController: UIViewController {
+class AddHabitViewController: UIViewController {
 
-    @IBOutlet weak var habitTitle: UILabel!
+    @IBOutlet weak var addHabitScreenLabel: UILabel!
     
-    var habitName = ""
+    var addHabitScreenLabelText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        habitTitle.text = habitName
-        
+        addHabitScreenLabel.text = addHabitScreenLabelText
+        view.backgroundColor = .brown
     }
     
 
