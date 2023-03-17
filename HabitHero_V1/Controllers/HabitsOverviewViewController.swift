@@ -170,6 +170,9 @@ extension HabitsOverviewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let HabitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
             self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
+            
+            HabitDetailsVC.habitLabel = habits[indexPath.row].name
+        
         }
     }
 }
