@@ -74,7 +74,6 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         addChild(profileVC)
         addChild(overallAnalyticsVC)
         
-        
         view.addSubview(settingsVC.view)
         view.addSubview(profileVC.view)
         view.addSubview(overallAnalyticsVC.view)
@@ -91,17 +90,6 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         profileVC.view.isHidden = true
         overallAnalyticsVC.view.isHidden = true
     }
-    
-    
-    @IBAction func addHabitButtonPressed(_ sender: UIBarButtonItem) {
-        
-         if let AddHabitVC = storyboard?.instantiateViewController(withIdentifier: K.AddHabitViewControllerID) as? AddHabitViewController {
-             AddHabitVC.addHabitScreenLabelText = "succesfully navigated"
-            self.navigationController?.pushViewController(AddHabitVC, animated: true)
-         
-    }
-    
-    // SideMenu Functionality
     
     @IBAction func sideBarButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -181,10 +169,7 @@ extension HabitsOverviewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let HabitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
-            HabitDetailsVC.habitName = habits[indexPath.row].name
             self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
-            
-            
         }
     }
 }

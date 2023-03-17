@@ -135,7 +135,7 @@
             </objects>
             <point key="canvasLocation" x="800.76335877862596" y="24.647887323943664"/>
         </scene>
-        <!--Habits-->
+        <!--Habits Overview-->
         <scene sceneID="gRq-94-Zmo">
             <objects>
                 <viewController storyboardIdentifier="HabitsOverviewViewController" id="OLX-Pv-FhR" customClass="HabitsOverviewViewController" customModule="HabitHero_V1" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,7 +156,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Habits" id="reU-Wk-qfG">
+                    <navigationItem key="navigationItem" title="Habits Overview" id="reU-Wk-qfG">
                         <barButtonItem key="leftBarButtonItem" image="line.horizontal.3" catalog="system" id="ErB-qk-NUG">
                             <color key="tintColor" name="AppColorCyan"/>
                             <connections>
@@ -165,9 +165,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dNs-VF-WMA">
                             <color key="tintColor" red="0.35294117650000001" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="addHabitButtonPressed:" destination="OLX-Pv-FhR" id="CV1-Lh-zZs"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -179,60 +176,22 @@
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="236.61971830985917"/>
         </scene>
-        <!--Add Habit View Controller-->
-        <scene sceneID="UH3-oR-BIR">
-            <objects>
-                <viewController id="QfI-tm-8ig" customClass="AddHabitViewController" customModule="HabitHero_V1" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Jhq-4i-sAJ">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1S-1h-d9b">
-                                <rect key="frame" x="175" y="384" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="AppColorCyan"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="25p-XZ-RGW"/>
-                        <color key="backgroundColor" name="AppColorBlack"/>
-                    </view>
-                    <connections>
-                        <outlet property="addHabitScreenLabel" destination="q1S-1h-d9b" id="i0T-hs-JBG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ri0-uj-dKZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3940" y="25"/>
-        </scene>
         <!--Details-->
         <scene sceneID="DSN-Ja-a4E">
             <objects>
                 <viewController storyboardIdentifier="HabitDetailsViewController" title="Details" id="8uA-J0-o6G" customClass="HabitDetailsViewController" customModule="HabitHero_V1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GTZ-Hu-2ng">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Habit title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJ8-TN-hzE">
-                                <rect key="frame" x="159" y="416" width="74" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="AppColorCyan"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="QYM-fa-tto"/>
                         <color key="backgroundColor" name="AppColorBlack"/>
                         <color key="tintColor" name="AppColorWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="habitTitle" destination="RJ8-TN-hzE" id="SV8-46-caU"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="nAx-oZ-16W"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7p-sJ-YaJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3941" y="696"/>
+            <point key="canvasLocation" x="3605" y="236"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="XEn-nC-cp3">
@@ -400,6 +359,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="OLX-Pv-FhR" kind="relationship" relationship="rootViewController" id="EKG-zv-MOa"/>
+                        <segue destination="8uA-J0-o6G" kind="show" id="z1c-iR-x0q"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G22-K5-qhT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,15 +9,10 @@ import UIKit
 
 class HabitDetailsViewController: UIViewController {
 
-    @IBOutlet weak var habitTitle: UILabel!
-    
-    var habitName = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        habitTitle.text = habitName
-        
+        // Do any additional setup after loading the view.
     }
     
 
