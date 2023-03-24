@@ -200,24 +200,6 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
             return selectedDays.joined(separator: ", ")
         }
     }
-    
-    private func updateDateLabels() {
-        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE"
-        
-        let today = Date()
-        let calendar = Calendar.current
-        
-        for i in 0..<days.count {
-            let date = calendar.date(byAdding: .day, value: i, to: today)!
-            let day = dateFormatter.string(from: date)
-            let isCompleted = habitCompletion[day] ?? false
-            
-            dateLabels[i].text = day
-            dateLabels[i].backgroundColor = isCompleted ? .green : .red
-        }
-    }
 
     
 }
