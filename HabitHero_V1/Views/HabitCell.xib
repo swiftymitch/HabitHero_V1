@@ -266,6 +266,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="frequencyLabel" destination="rwz-G2-7UK" id="jMO-SN-T4E"/>
                 <outlet property="fridayLabel" destination="DX9-E1-LsY" id="Lez-gv-BZN"/>
                 <outlet property="habitTitle" destination="fgq-yO-khc" id="8vI-Sa-zRM"/>
                 <outlet property="mondayLabel" destination="Jvw-fr-NTj" id="XHB-Sz-otD"/>

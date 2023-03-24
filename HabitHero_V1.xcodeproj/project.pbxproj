@@ -39,6 +39,7 @@
 		3041768D29B5F67900F366A1 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041768C29B5F67900F366A1 /* Habit.swift */; };
 		3041769429B740E900F366A1 /* HabitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3041769229B740E900F366A1 /* HabitCell.swift */; };
 		3041769529B740E900F366A1 /* HabitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3041769329B740E900F366A1 /* HabitCell.xib */; };
+		30FBB4E729CADB36000A5198 /* AddHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FBB4E629CADB36000A5198 /* AddHabitViewController.swift */; };
 		EFB61D11A71A1376EF0A0D99 /* Pods_HabitHero_V1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09AB3BA54BEEF788218CFC01 /* Pods_HabitHero_V1.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		3041768C29B5F67900F366A1 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		3041769229B740E900F366A1 /* HabitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCell.swift; sourceTree = "<group>"; };
 		3041769329B740E900F366A1 /* HabitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HabitCell.xib; sourceTree = "<group>"; };
+		30FBB4E629CADB36000A5198 /* AddHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitViewController.swift; sourceTree = "<group>"; };
 		45BE801BADE8EB5107B06AB1 /* Pods-HabitHero_V1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHero_V1.debug.xcconfig"; path = "Target Support Files/Pods-HabitHero_V1/Pods-HabitHero_V1.debug.xcconfig"; sourceTree = "<group>"; };
 		84202E30D2FC563E795B926A /* Pods-HabitHero_V1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HabitHero_V1.release.xcconfig"; path = "Target Support Files/Pods-HabitHero_V1/Pods-HabitHero_V1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 				300C575629BB224F00CA7B16 /* SettingsViewController.swift */,
 				300C575829BB228400CA7B16 /* OverallAnalyticsViewController.swift */,
 				300CCC8429BF24FD007B633A /* HabitDetailsViewController.swift */,
+				30FBB4E629CADB36000A5198 /* AddHabitViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				3041765729B1FEE400F366A1 /* LoginViewController.swift in Sources */,
 				3041765329B1FEE400F366A1 /* AppDelegate.swift in Sources */,
 				300C575329B88AAE00CA7B16 /* SideMenuController.swift in Sources */,
+				30FBB4E729CADB36000A5198 /* AddHabitViewController.swift in Sources */,
 				300C575529BB21F200CA7B16 /* ProfileViewController.swift in Sources */,
 				3041768229B2195400F366A1 /* SignUpViewController.swift in Sources */,
 				3041765529B1FEE400F366A1 /* SceneDelegate.swift in Sources */,

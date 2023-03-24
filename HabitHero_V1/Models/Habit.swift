@@ -12,8 +12,11 @@ struct Habit {
     // here go all the properties associated with a habit
     
     // General Data
-    let name: String
-    let description: String
+    let id: String
+    let title: String
+    let createdAt: Date
+    let updatedAt: Date
+    let frequency: [String: Bool]
     
     /*
     let color: String

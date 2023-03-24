@@ -18,6 +18,7 @@ class HabitCell: UITableViewCell {
     @IBOutlet weak var sundayLabel: UILabel!
     
     @IBOutlet weak var habitTitle: UILabel!
+    @IBOutlet weak var frequencyLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

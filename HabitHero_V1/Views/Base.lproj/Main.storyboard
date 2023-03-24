@@ -165,6 +165,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="dNs-VF-WMA">
                             <color key="tintColor" red="0.35294117650000001" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addHabitButtonPressed:" destination="OLX-Pv-FhR" id="6Jt-DO-cpD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -175,6 +178,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Bg-oN-VOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2765.6488549618321" y="236.61971830985917"/>
+        </scene>
+        <!--Add Habit View Controller-->
+        <scene sceneID="LYM-83-qJ2">
+            <objects>
+                <viewController storyboardIdentifier="AddHabitViewController" id="xCS-47-BIN" customClass="AddHabitViewController" customModule="HabitHero_V1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9aX-6c-UaI">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="j5I-39-W3S"/>
+                        <color key="backgroundColor" name="AppColorBlack"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lEI-e1-eNw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ykL-G6-CAe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3604" y="-39"/>
         </scene>
         <!--Details-->
         <scene sceneID="DSN-Ja-a4E">
@@ -203,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7p-sJ-YaJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3603.8167938931297" y="235.91549295774649"/>
+            <point key="canvasLocation" x="3604" y="627"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="XEn-nC-cp3">

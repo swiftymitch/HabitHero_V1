@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
 import SideMenu
 
 class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
@@ -20,10 +21,8 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     
     private var menu: SideMenuNavigationController?
     
-    var habits: [Habit] = [
-        Habit(name: "Workout", description: "Get Stronger"),
-        Habit(name: "Drink 4L Water", description: "To be more hydrated"),
-        Habit(name: "Read 4 Pages", description: "To become smarter")]
+    private var habits: [Habit] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +47,8 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         
         addChildControllers()
+        
+        fetchHabits()
        
     }
     
@@ -69,6 +70,14 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     }
     */
     
+    // Add Habit Button and Navigation to AddHabitViewController
+    @IBAction func addHabitButtonPressed(_ sender: UIBarButtonItem) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addHabitViewController = storyboard.instantiateViewController(withIdentifier: K.AddHabitViewControllerID) as! AddHabitViewController
+            navigationController?.pushViewController(addHabitViewController, animated: true)
+    }
+    
+    // Add Child Controllers for Sidemenu
     private func addChildControllers() {
         addChild(settingsVC)
         addChild(profileVC)
@@ -142,6 +151,75 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         }
     }
     
+    private func fetchHabits() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let habitsRef = Firestore.firestore().collection("users").document(currentUserID).collection("habits")
+
+        habitsRef.addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching habits: \(error!)")
+                return
+            }
+
+            var fetchedHabits: [Habit] = []
+
+            for document in documents {
+                let habitDict = document.data()
+                if let title = habitDict["title"] as? String,
+                   let createdAt = habitDict["createdAt"] as? Timestamp,
+                   let updatedAt = habitDict["updatedAt"] as? Timestamp,
+                   let frequency = habitDict["frequency"] as? [String: Bool] {
+
+                    let habit = Habit(
+                        id: document.documentID,
+                        title: title,
+                        createdAt: createdAt.dateValue(),
+                        updatedAt: updatedAt.dateValue(),
+                        frequency: frequency
+                    )
+                    fetchedHabits.append(habit)
+                }
+            }
+
+            self.habits = fetchedHabits
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func formattedFrequencyText(frequency: [String: Bool]) -> String {
+        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        let selectedDays = days.filter { frequency[$0] == true }
+
+        if selectedDays.count == 7 {
+            return "Everyday"
+        } else if selectedDays == ["Mon", "Tue", "Wed", "Thu", "Fri"] {
+            return "On Weekdays"
+        } else if selectedDays == ["Sat", "Sun"] {
+            return "On Weekends"
+        } else {
+            return selectedDays.joined(separator: ", ")
+        }
+    }
+    
+    private func updateDateLabels() {
+        let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        
+        let today = Date()
+        let calendar = Calendar.current
+        
+        for i in 0..<days.count {
+            let date = calendar.date(byAdding: .day, value: i, to: today)!
+            let day = dateFormatter.string(from: date)
+            let isCompleted = habitCompletion[day] ?? false
+            
+            dateLabels[i].text = day
+            dateLabels[i].backgroundColor = isCompleted ? .green : .red
+        }
+    }
+
+    
 }
 
 //MARK:  - Tableview Datasource
@@ -156,8 +234,11 @@ extension HabitsOverviewViewController: UITableViewDataSource {
         // code
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! HabitCell
+        let habit = habits[indexPath.row]
         
-        cell.habitTitle.text = habits[indexPath.row].name
+        cell.habitTitle.text = habits[indexPath.row].title
+        cell.frequencyLabel.text = formattedFrequencyText(frequency: habit.frequency) // Set the frequency text here
+    
         //cell.habitDescriptionTextField.text = habits[indexPath.row].description
         return cell
     }
@@ -171,7 +252,7 @@ extension HabitsOverviewViewController: UITableViewDelegate {
         if let HabitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
             self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
             
-            HabitDetailsVC.habitLabel = habits[indexPath.row].name
+            HabitDetailsVC.habitLabel = habits[indexPath.row].title
         
         }
     }
