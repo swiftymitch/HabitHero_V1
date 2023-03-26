@@ -13,27 +13,27 @@ import FirebaseAuth
 class AddHabitViewController: UIViewController {
     
     private let titleLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Add Habit"
-            label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        private let habitNameTextField: UITextField = {
-            let textField = UITextField()
-            textField.placeholder = "Habit name"
-            textField.borderStyle = .roundedRect
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            return textField
-        }()
-        
-        private let addButton: UIButton = {
-            let button = UIButton(type: .system)
-            button.setTitle("Add", for: .normal)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let label = UILabel()
+        label.text = "Add Habit"
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let habitNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Habit name"
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Add", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private let dayButtons: [UIButton] = {
         let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -60,6 +60,9 @@ class AddHabitViewController: UIViewController {
         "Sat": false,
         "Sun": false
     ]
+    
+    private var completionStatus: [String: Bool] = [:]
+    
     
     private let daysStackView: UIStackView = {
         let stackView = UIStackView()
@@ -131,7 +134,8 @@ class AddHabitViewController: UIViewController {
             "title": habit.title,
             "createdAt": Timestamp(date: habit.createdAt),
             "updatedAt": Timestamp(date: habit.updatedAt),
-            "frequency": habit.frequency
+            "frequency": habit.frequency,
+            "completionStatus": habit.completionStatus
             // Add other properties, if needed
         ]) { error in
             if let error = error {
@@ -159,7 +163,8 @@ class AddHabitViewController: UIViewController {
             title: habitName,
             createdAt: currentDate,
             updatedAt: currentDate,
-            frequency: frequency // Set the frequency or any other properties as needed
+            frequency: frequency,
+            completionStatus: completionStatus// Set the frequency or any other properties as needed
         )
 
         // Call the saveHabit(habit:) function to save the habit to Firebase

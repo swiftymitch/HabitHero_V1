@@ -49,32 +49,14 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         addChildControllers()
         
         fetchHabits()
-       
-    }
-    
-    /*
-    @IBAction func logoutButtonPressed(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-            
-            print("User logged out")
-            
-            let loginController = self.storyboard!.instantiateViewController(withIdentifier: K.LoginViewControllerID) as! LoginViewController
-            
-            self.present(loginController, animated: true, completion: nil)
-            
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
         
     }
-    */
     
     // Add Habit Button and Navigation to AddHabitViewController
     @IBAction func addHabitButtonPressed(_ sender: UIBarButtonItem) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let addHabitViewController = storyboard.instantiateViewController(withIdentifier: K.AddHabitViewControllerID) as! AddHabitViewController
-            navigationController?.pushViewController(addHabitViewController, animated: true)
+        navigationController?.pushViewController(addHabitViewController, animated: true)
     }
     
     // Add Child Controllers for Sidemenu
@@ -111,7 +93,7 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
         title = named.rawValue
         
         switch named {
-        
+            
         case .home:
             settingsVC.view.isHidden = true
             profileVC.view.isHidden = true
@@ -154,33 +136,35 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     private func fetchHabits() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let habitsRef = Firestore.firestore().collection("users").document(currentUserID).collection("habits")
-
+        
         habitsRef.addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching habits: \(error!)")
                 return
             }
-
+            
             var fetchedHabits: [Habit] = []
-
+            
             for document in documents {
                 let habitDict = document.data()
                 if let title = habitDict["title"] as? String,
                    let createdAt = habitDict["createdAt"] as? Timestamp,
                    let updatedAt = habitDict["updatedAt"] as? Timestamp,
-                   let frequency = habitDict["frequency"] as? [String: Bool] {
-
+                   let frequency = habitDict["frequency"] as? [String: Bool],
+                   let completionStatus = habitDict["completionStatus"] as? [String: Bool] {
+                    
                     let habit = Habit(
                         id: document.documentID,
                         title: title,
                         createdAt: createdAt.dateValue(),
                         updatedAt: updatedAt.dateValue(),
-                        frequency: frequency
+                        frequency: frequency,
+                        completionStatus: completionStatus
                     )
                     fetchedHabits.append(habit)
                 }
             }
-
+            
             self.habits = fetchedHabits
             self.tableView.reloadData()
         }
@@ -189,7 +173,7 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     private func formattedFrequencyText(frequency: [String: Bool]) -> String {
         let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         let selectedDays = days.filter { frequency[$0] == true }
-
+        
         if selectedDays.count == 7 {
             return "Everyday"
         } else if selectedDays == ["Mon", "Tue", "Wed", "Thu", "Fri"] {
@@ -200,7 +184,51 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
             return selectedDays.joined(separator: ", ")
         }
     }
+    
+    private func updateHabitCompletionStatus(at index: Int, with updatedCompletionStatus: [String: Bool]) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        let habit = habits[index]
+        let habitDocumentRef = Firestore.firestore().collection("users").document(userId).collection("habits").document(habit.id)
+        
+        habitDocumentRef.updateData(["completionStatus": updatedCompletionStatus]) { [weak self] error in
+            if let error = error {
+                print("Error updating habit completion status: \(error)")
+            } else {
+                print("Habit completion status updated")
+                let updatedHabit = Habit(
+                    id: habit.id,
+                    title: habit.title,
+                    createdAt: habit.createdAt,
+                    updatedAt: Date(),
+                    frequency: habit.frequency,
+                    completionStatus: updatedCompletionStatus
+                )
+                self?.habits[index] = updatedHabit
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    func getWeekDates() -> [Date] {
+        var dates: [Date] = []
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate)
+        
+        if let sunday = calendar.date(from: components) {
+            let firstDayOfWeek = calendar.date(byAdding: .day, value: 1, to: sunday)!
+            
+            for i in 0..<7 {
+                let date = calendar.date(byAdding: .day, value: i, to: firstDayOfWeek)!
+                dates.append(date)
+            }
+        }
+        
+        return dates
+    }
 
+    
     
 }
 
@@ -213,16 +241,40 @@ extension HabitsOverviewViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // code
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! HabitCell
-        let habit = habits[indexPath.row]
-        
-        cell.habitTitle.text = habits[indexPath.row].title
-        cell.frequencyLabel.text = formattedFrequencyText(frequency: habit.frequency) // Set the frequency text here
-    
-        //cell.habitDescriptionTextField.text = habits[indexPath.row].description
-        return cell
+            let habit = habits[indexPath.row]
+            
+            cell.habitTitle.text = habits[indexPath.row].title
+            cell.frequencyLabel.text = formattedFrequencyText(frequency: habit.frequency)
+            cell.configureDateLabels(completionStatus: habit.completionStatus, getWeekDates: getWeekDates)
+            
+            cell.toggleCompletionHandler = { [weak self] in
+                guard let self = self else { return }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd"
+                let currentDateString = dateFormatter.string(from: Date())
+                
+                let isCompletedToday = habit.completionStatus[currentDateString] ?? false
+                let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: !isCompletedToday]) { (_, new) in new }
+                
+                self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
+            }
+            
+            cell.resetTodayHandler = { [weak self] in
+                guard let self = self else { return }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd"
+                let currentDateString = dateFormatter.string(from: Date())
+                
+                let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: false]) { (_, new) in new }
+                
+                self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
+            }
+            
+            // Move the return cell line here, outside the closure.
+            return cell
     }
 }
 
@@ -235,7 +287,7 @@ extension HabitsOverviewViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
             
             HabitDetailsVC.habitLabel = habits[indexPath.row].title
-        
+            
         }
     }
 }

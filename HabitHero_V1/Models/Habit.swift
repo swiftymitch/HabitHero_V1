@@ -17,6 +17,7 @@ struct Habit {
     let createdAt: Date
     let updatedAt: Date
     let frequency: [String: Bool]
+    let completionStatus: [String: Bool]
     
     /*
     let color: String
