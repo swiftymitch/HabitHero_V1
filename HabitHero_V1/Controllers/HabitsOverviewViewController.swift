@@ -56,6 +56,13 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     @IBAction func addHabitButtonPressed(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let addHabitViewController = storyboard.instantiateViewController(withIdentifier: K.AddHabitViewControllerID) as! AddHabitViewController
+        
+        // Configure the back button of the AddHabitViewController
+        let backButton = UIBarButtonItem()
+        backButton.title = "" // Set an empty title to remove the "Back" text
+        backButton.tintColor = .cyan // Set the color to cyan
+        navigationItem.backBarButtonItem = backButton
+        
         navigationController?.pushViewController(addHabitViewController, animated: true)
     }
     

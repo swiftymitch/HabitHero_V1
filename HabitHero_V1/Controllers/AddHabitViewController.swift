@@ -10,6 +10,27 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+
+class NoHighlightButton: UIButton {
+    var isButtonSelected: Bool = false {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    private func updateAppearance() {
+        backgroundColor = isButtonSelected ? .cyan : .white
+        setTitleColor(isButtonSelected ? .white : .black, for: .normal)
+    }
+}
+
+
 class AddHabitViewController: UIViewController {
     
     private let titleLabel: UILabel = {
@@ -22,23 +43,29 @@ class AddHabitViewController: UIViewController {
     
     private let habitNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Habit name"
+        textField.placeholder = "Enter Habit Name"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textColor = UIColor(named: K.AppColors.white)
+        textField.backgroundColor = UIColor(named: K.AppColors.grey)
+        textField.layer.cornerRadius = 5
         return textField
     }()
     
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Add", for: .normal)
+        button.setTitleColor(.cyan, for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private let dayButtons: [UIButton] = {
+    private let dayButtons: [NoHighlightButton] = {
         let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         return days.map { day in
-            let button = UIButton(type: .system)
+            let button = NoHighlightButton(type: .system)
             button.setTitle(day, for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.setTitleColor(.white, for: .selected)
@@ -73,9 +100,6 @@ class AddHabitViewController: UIViewController {
         return stackView
     }()
     
-
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,36 +108,46 @@ class AddHabitViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(habitNameTextField)
         view.addSubview(addButton)
-            
-            // Add targets or actions for buttons if needed, for example:
+        
+        // Add targets or actions for buttons if needed, for example:
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-            
+        addButton.backgroundColor = UIColor(named: K.AppColors.grey)
+        
+        view.addSubview(daysStackView) // Move this line before setting the constraints
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.title = "Add Habit"
+        
         setupConstraints()
 
         for button in dayButtons {
-                daysStackView.addArrangedSubview(button)
-            }
+            daysStackView.addArrangedSubview(button)
+        }
         
-        view.addSubview(daysStackView)
+        
+        
+        daysStackView.translatesAutoresizingMaskIntoConstraints = false // Add this line
         
         NSLayoutConstraint.activate([
-                daysStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-                daysStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                daysStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            ])
+            daysStackView.topAnchor.constraint(equalTo: habitNameTextField.bottomAnchor, constant: 32),
+            daysStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            daysStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+        ])
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            habitNameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32),
+            habitNameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             habitNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             habitNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            addButton.topAnchor.constraint(equalTo: habitNameTextField.bottomAnchor, constant: 16),
-            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            daysStackView.topAnchor.constraint(equalTo: habitNameTextField.bottomAnchor, constant: 32),
+            daysStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            daysStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            addButton.topAnchor.constraint(equalTo: daysStackView.bottomAnchor, constant: 16),
+            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addButton.widthAnchor.constraint(equalTo: habitNameTextField.widthAnchor)
         ])
     }
     
@@ -179,12 +213,11 @@ class AddHabitViewController: UIViewController {
     }
     
     
-    @objc private func dayButtonTapped(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        sender.backgroundColor = sender.isSelected ? .black : .white
+    @objc private func dayButtonTapped(_ sender: NoHighlightButton) {
+        sender.isButtonSelected.toggle()
 
         if let title = sender.title(for: .normal) {
-            frequency[title] = sender.isSelected
+            frequency[title] = sender.isButtonSelected
         }
     }
 
