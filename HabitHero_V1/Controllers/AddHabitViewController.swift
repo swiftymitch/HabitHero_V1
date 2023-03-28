@@ -43,14 +43,26 @@ class AddHabitViewController: UIViewController {
     
     private let habitNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter Habit Name"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = UIColor(named: K.AppColors.white)
         textField.backgroundColor = UIColor(named: K.AppColors.grey)
         textField.layer.cornerRadius = 5
+
+        let placeholderOpacity: CGFloat = 0.5 // Set the desired opacity here (0.0 to 1.0)
+        let placeholderTextColor = UIColor.white.withAlphaComponent(placeholderOpacity)
+
+        let placeholderText = NSAttributedString(
+            string: "Enter Habit Name",
+            attributes: [
+                .foregroundColor: placeholderTextColor
+            ]
+        )
+        textField.attributedPlaceholder = placeholderText
+
         return textField
     }()
+
     
     private let addButton: UIButton = {
         let button = UIButton(type: .system)

@@ -202,23 +202,11 @@
                     <view key="view" contentMode="scaleToFill" id="GTZ-Hu-2ng">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yz-BH-o0I">
-                                <rect key="frame" x="148" y="394" width="97" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="AppColorCyan"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="QYM-fa-tto"/>
                         <color key="backgroundColor" name="AppColorBlack"/>
                         <color key="tintColor" name="AppColorWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="nAx-oZ-16W"/>
-                    <connections>
-                        <outlet property="habitNameLabel" destination="7yz-BH-o0I" id="4uH-zH-2k8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7p-sJ-YaJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

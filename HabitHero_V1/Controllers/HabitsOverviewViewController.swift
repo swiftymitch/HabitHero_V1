@@ -290,11 +290,9 @@ extension HabitsOverviewViewController: UITableViewDataSource {
 extension HabitsOverviewViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let HabitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
-            self.navigationController?.pushViewController(HabitDetailsVC, animated: true)
-            
-            HabitDetailsVC.habitLabel = habits[indexPath.row].title
-            
+        if let habitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
+            habitDetailsVC.selectedHabit = habits[indexPath.row] // Pass the selected habit to the HabitDetailsViewController
+            self.navigationController?.pushViewController(habitDetailsVC, animated: true)
         }
     }
 }

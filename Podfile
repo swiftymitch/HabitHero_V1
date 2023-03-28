@@ -8,5 +8,6 @@ target 'HabitHero_V1' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'SideMenu'
+  pod 'FSCalendar'
 
 end
