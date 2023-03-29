@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Habit {
+struct Habit: Codable {
     
     // here go all the properties associated with a habit
     
@@ -17,7 +17,7 @@ struct Habit {
     let createdAt: Date
     let updatedAt: Date
     let frequency: [String: Bool]
-    let completionStatus: [String: Bool]
+    var completionStatus: [String: Bool]
     
     /*
     let color: String

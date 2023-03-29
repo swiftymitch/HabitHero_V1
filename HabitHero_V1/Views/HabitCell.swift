@@ -58,6 +58,13 @@ class HabitCell: UITableViewCell {
         sundayLabel.layer.masksToBounds = true
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for label in dateLabels {
+            label.backgroundColor = .red
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

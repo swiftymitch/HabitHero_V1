@@ -8,8 +8,8 @@
 import UIKit
 import FirebaseCore
 import FirebaseAuth
-import FirebaseFirestore
 import SideMenu
+import FirebaseFirestore
 
 class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     
@@ -23,6 +23,8 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
     
     private var habits: [Habit] = []
     
+    var selectedHabitIndex: Int?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -292,6 +294,13 @@ extension HabitsOverviewViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let habitDetailsVC = storyboard?.instantiateViewController(withIdentifier: K.HabitDetailsViewControllerID) as? HabitDetailsViewController {
             habitDetailsVC.selectedHabit = habits[indexPath.row] // Pass the selected habit to the HabitDetailsViewController
+            selectedHabitIndex = indexPath.row
+            habitDetailsVC.completionHandler = { [weak self] updatedHabit in
+                if let index = self?.selectedHabitIndex {
+                    self?.habits[index] = updatedHabit
+                    self?.tableView.reloadData()
+                }
+            }
             self.navigationController?.pushViewController(habitDetailsVC, animated: true)
         }
     }

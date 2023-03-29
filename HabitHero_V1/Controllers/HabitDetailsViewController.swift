@@ -7,6 +7,13 @@
 
 import UIKit
 import FSCalendar
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
+
+protocol HabitDetailsDelegate: AnyObject {
+    func habitDetailsViewController(_ controller: HabitDetailsViewController, didUpdateHabit habit: Habit)
+}
 
 class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     
@@ -14,12 +21,16 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
     
     var selectedHabit: Habit?
     
+    weak var delegate: HabitDetailsDelegate?
+    
+    var completionHandler: ((Habit) -> Void)?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Details" // Set the navigation bar title to "Details"
+        title = "Details"
         
-        // Remove the text of the back button in the navigation bar
         let backButton = UIBarButtonItem()
         backButton.title = ""
         navigationItem.backBarButtonItem = backButton
@@ -28,18 +39,19 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
     }
     
     private func isHabitCompleted(on date: Date) -> Bool {
-        guard let habit = selectedHabit else { return false }
+        guard let habit = selectedHabit else { return false } // Remove .habit here
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: date)
         
         let isCompleted = habit.completionStatus[dateString] ?? false
         return isCompleted
     }
+
     
     private func isHabitScheduled(on date: Date) -> Bool {
-        guard let habit = selectedHabit else { return false }
+        guard let habit = selectedHabit else { return false } // Remove .habit here
         
         let calendar = Calendar.current
         let weekday = calendar.component(.weekday, from: date)
@@ -68,8 +80,48 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: date)
+            
+            if let habit = selectedHabit {
+                var updatedCompletionStatus = habit.completionStatus
+                updatedCompletionStatus[dateString] = !isHabitCompleted(on: date)
+                
+                selectedHabit = Habit(id: habit.id,
+                                      title: habit.title,
+                                      createdAt: habit.createdAt,
+                                      updatedAt: habit.updatedAt,
+                                      frequency: habit.frequency,
+                                      completionStatus: updatedCompletionStatus)
+                
+                // Update the habit in Firebase
+                updateHabitInFirebase(habit: selectedHabit!)
+                
+                delegate?.habitDetailsViewController(self, didUpdateHabit: selectedHabit!)
+                
+                calendar.reloadData()
+            }
         }
     }
+    
+    func updateHabitInFirebase(habit: Habit) {
+        let db = Firestore.firestore()
+        let habitRef = db.collection("habits").document(habit.id)
+        
+        habitRef.updateData([
+            "title": habit.title,
+            "frequency": habit.frequency,
+            "createdAt": habit.createdAt,
+            "updatedAt": habit.updatedAt,
+            "completionStatus": habit.completionStatus
+        ])
+        
+        completionHandler?(habit)
+        
+    }
+
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         if isHabitCompleted(on: date) {
