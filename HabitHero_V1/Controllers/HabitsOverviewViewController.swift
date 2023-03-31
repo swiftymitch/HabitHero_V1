@@ -214,7 +214,6 @@ class HabitsOverviewViewController: UIViewController, MenuControllerDelegate {
                     completionStatus: updatedCompletionStatus
                 )
                 self?.habits[index] = updatedHabit
-                self?.tableView.reloadData()
             }
         }
     }
@@ -251,39 +250,45 @@ extension HabitsOverviewViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! HabitCell
-            let habit = habits[indexPath.row]
+        let habit = habits[indexPath.row]
+        
+        cell.habitTitle.text = habits[indexPath.row].title
+        cell.frequencyLabel.text = formattedFrequencyText(frequency: habit.frequency)
+        
+        // Get the week dates in HabitsOverviewViewController
+        let weekDates = getWeekDates()
+        cell.configureDateLabels(completionStatus: habit.completionStatus, weekDates: weekDates)
+        
+        cell.toggleCompletionHandler = { [weak self] in
+            guard let self = self else { return }
             
-            cell.habitTitle.text = habits[indexPath.row].title
-            cell.frequencyLabel.text = formattedFrequencyText(frequency: habit.frequency)
-            cell.configureDateLabels(completionStatus: habit.completionStatus, getWeekDates: getWeekDates)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd"
+            let currentDateString = dateFormatter.string(from: Date())
             
-            cell.toggleCompletionHandler = { [weak self] in
-                guard let self = self else { return }
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd"
-                let currentDateString = dateFormatter.string(from: Date())
-                
-                let isCompletedToday = habit.completionStatus[currentDateString] ?? false
-                let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: !isCompletedToday]) { (_, new) in new }
-                
-                self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
-            }
+            let isCompletedToday = habit.completionStatus[currentDateString] ?? false
+            let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: !isCompletedToday]) { (_, new) in new }
             
-            cell.resetTodayHandler = { [weak self] in
-                guard let self = self else { return }
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd"
-                let currentDateString = dateFormatter.string(from: Date())
-                
-                let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: false]) { (_, new) in new }
-                
-                self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
-            }
+            // Update the cell's UI directly
+            let newColor: UIColor = !isCompletedToday ? .green : .red
+            cell.updateDateLabelBackgroundColor(date: currentDateString, color: newColor)
             
-            // Move the return cell line here, outside the closure.
-            return cell
+            self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
+        }
+        
+        cell.resetTodayHandler = { [weak self] in
+            guard let self = self else { return }
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd"
+            let currentDateString = dateFormatter.string(from: Date())
+            
+            let updatedCompletionStatus = habit.completionStatus.merging([currentDateString: false]) { (_, new) in new }
+            
+            self.updateHabitCompletionStatus(at: indexPath.row, with: updatedCompletionStatus)
+        }
+        
+        return cell
     }
 }
 

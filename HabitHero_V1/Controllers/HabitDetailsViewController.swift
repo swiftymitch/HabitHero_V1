@@ -24,6 +24,8 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
     weak var delegate: HabitDetailsDelegate?
     
     var completionHandler: ((Habit) -> Void)?
+    
+    private var selectedDates: [Date] = []
 
     
     override func viewDidLoad() {
@@ -101,10 +103,19 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
                 
                 delegate?.habitDetailsViewController(self, didUpdateHabit: selectedHabit!)
                 
+                if isHabitCompleted(on: date) {
+                    if let index = selectedDates.firstIndex(of: date) {
+                        selectedDates.remove(at: index)
+                    }
+                } else {
+                    selectedDates.append(date)
+                }
+                
                 calendar.reloadData()
             }
         }
     }
+
     
     func updateHabitInFirebase(habit: Habit) {
         let db = Firestore.firestore()
@@ -140,6 +151,16 @@ class HabitDetailsViewController: UIViewController, FSCalendarDataSource, FSCale
             return .white
         } else {
             return nil
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+        if monthPosition == .current {
+            if selectedDates.contains(date) {
+                calendar.select(date)
+            } else {
+                calendar.deselect(date)
+            }
         }
     }
     

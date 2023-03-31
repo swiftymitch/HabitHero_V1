@@ -71,22 +71,33 @@ class HabitCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureDateLabels(completionStatus: [String: Bool], getWeekDates: () -> [Date]) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd"
+    func configureDateLabels(completionStatus: [String: Bool], weekDates: [Date]) {
+        let dayDateFormatter = DateFormatter()
+        dayDateFormatter.dateFormat = "dd"
         
-        let weekDates = getWeekDates()
-        
+        let fullDateFormatter = DateFormatter()
+        fullDateFormatter.dateFormat = "yyyy-MM-dd"
+
         for i in 0..<dateLabels.count {
             let date = weekDates[i]
-            let dateString = dateFormatter.string(from: date)
+            let dayString = dayDateFormatter.string(from: date)
+            let dateString = fullDateFormatter.string(from: date)
             let isCompleted = completionStatus[dateString] ?? false
-            
-            dateLabels[i].text = dateString
+
+            dateLabels[i].text = dayString
             dateLabels[i].backgroundColor = isCompleted ? .green : .red
         }
     }
 
+    
+    
+    func updateDateLabelBackgroundColor(date: String, color: UIColor) {
+        if let dateLabel = dateLabels.first(where: { $0.text == date }) {
+            dateLabel.backgroundColor = color
+        }
+    }
+    
+    
 
     
     @IBAction func toggleCompletionButtonTapped(_ sender: UIButton) {
